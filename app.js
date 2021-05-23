@@ -6,10 +6,12 @@
 */
 
 const randomNumbers = [10, 30, 15, 25, 50, 40, 5]
-const oddRandomNumbers = randomNumbers.filter((number) => number % 2 != 0);
-console.log('------------------------- Exercício 1 -------------------------');
-console.log(oddRandomNumbers);
-console.log('------------------------- Exercício 1 -------------------------');
+
+const getOddNumbers = (randomNumber) => randomNumber % 2 === 1
+
+const oddNumbers = randomNumbers.filter(getOddNumbers)
+
+console.log(oddNumbers)
 
 /*
   02
@@ -18,10 +20,13 @@ console.log('------------------------- Exercício 1 -------------------------');
 */
 
 const crazyNumbers = [937, 5, 395, 402, 501, 333, 502, 781, 3, 691]
-const numbersBelow501 = crazyNumbers.filter((number) => number < 501);
-console.log('------------------------- Exercício 2 -------------------------');
-console.log(numbersBelow501);
-console.log('------------------------- Exercício 2 -------------------------');
+
+const countNumbersLessThan501 = (accumulator, crazyNumber) =>
+  crazyNumber < 501 ? ++accumulator : accumulator
+
+const numbersLessThan501 = crazyNumbers.reduce(countNumbersLessThan501, 0)
+
+console.log(numbersLessThan501)
 
 /*
   03
@@ -31,10 +36,10 @@ console.log('------------------------- Exercício 2 -------------------------');
 */
 
 const numbers = [5, 7, 3]
-const numbersToThePowerOf2 = numbers.map((number) => number ** 2);
-console.log('------------------------- Exercício 3 -------------------------');
-console.log(numbersToThePowerOf2);
-console.log('------------------------- Exercício 3 -------------------------');
+
+const squareNumbers = numbers.map(number => number ** 2)
+
+console.log(squareNumbers)
 
 /*
   04
@@ -56,14 +61,10 @@ const tarantinoMovies = [
   { name: 'À Prova de Morte', release: 2007 },
   { name: 'Kill Bill: Volume 1', release: 2003 }
 ]
-const moviesAfter2k = tarantinoMovies.filter((movie) => {
-  if (movie.release < 2000) {
-    return { name: movie.name, release: movie.release };
-  }
-});
-console.log('------------------------- Exercício 4 -------------------------');
-console.log(moviesAfter2k);
-console.log('------------------------- Exercício 4 -------------------------');
+const moviesBefore2000 = tarantinoMovies.filter(({ release }) =>
+  release < 2000)
+
+console.log(moviesBefore2000)
 
 /*
   05
@@ -81,10 +82,10 @@ const tvShows = [
   { name: 'House M.D.', releaseYear: 2004 },
   { name: 'Watchmen', releaseYear: 2019 }
 ]
-const tvShowsList = tvShows.map((tvShow) => tvShow.name);
-console.log('------------------------- Exercício 5 -------------------------');
-console.log(tvShowsList);
-console.log('------------------------- Exercício 5 -------------------------');
+
+const showNames = tvShows.map(({ name }) => name)
+
+console.log(showNames)
 
 /*
   06
@@ -105,16 +106,13 @@ const cart = [
   { name: 'Death Stranding', price: 149.99 }
 ]
 
-const cartList = cart.reduce(
-  (accumulator, item, index) =>
-    accumulator + `- ${item.name}${index + 1 == cart.length ? '' : '\n'}`,
-  ''
-);
-console.log('------------------------- Exercício 6 -------------------------');
-console.log(cartList);
-console.log('------------------------- Exercício 6 -------------------------');
 /*
   - Nome 1
   - Nome 2
   - Nome 3
 */
+
+const productList = cart.reduce((accumulator, { name }) =>
+  `${accumulator}- ${name}\n`, '')
+
+console.log(productList)
